@@ -2,10 +2,10 @@ import java.lang.reflect.Method;
 
 public class ObjectFactory {
 
-    public static <T> T createObject(Class<?> clazz) throws Exception {
+    public static <T> T createObject(Class<T> clazz) throws Exception {
         Method[] methods = clazz.getMethods();
 
-        Object newObject = clazz.newInstance();
+        T newObject = clazz.newInstance();
 
         for (Method method : methods){
             if (method.isAnnotationPresent(RunThisMethod.class)){
@@ -17,7 +17,7 @@ public class ObjectFactory {
             }
         }
 
-        return (T) newObject;
+        return newObject;
     }
 
 }
